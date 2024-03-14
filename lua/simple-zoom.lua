@@ -22,9 +22,6 @@ function M.zoom_in()
     end
 
     -- Set tab-specific variable
-    -- TODO: Should this be done using something different, like a
-    -- plugin-specific value? Using a tab-specific value is good for cases of
-    -- moving between tabs, even if that is not my use-case.
     vim.api.nvim_tabpage_set_var(0, 'simple-zoom', 'zoom')
     print('zoomed in')
 end
