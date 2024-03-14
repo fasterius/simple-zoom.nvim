@@ -31,7 +31,6 @@ function M.zoom_out()
     vim.cmd[[mkview]]
 
     -- Show tabline again if it was hidden
-    -- TODO: Get the current setting for showtabline and restore that
     if M.opts.hide_tabline then
         vim.o.showtabline = true
     end
