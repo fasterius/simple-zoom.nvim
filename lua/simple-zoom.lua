@@ -22,11 +22,11 @@ function M.zoom_in()
     end
 
     -- Set tab-specific variable
-    -- TODO: What does the LSP diagnostic warning mean?
     -- TODO: Should this be done using something different, like a
     -- plugin-specific value? Using a tab-specific value is good for cases of
     -- moving between tabs, even if that is not my use-case.
-    vim.t.zoom = 'zoom'
+    vim.api.nvim_tabpage_set_var(0, 'simple-zoom', 'zoom')
+    print('zoomed in')
 end
 
 function M.zoom_out()
@@ -49,14 +49,15 @@ function M.zoom_out()
     if M.opts.center_view then
         vim.cmd[[normal! zz]]
     end
+    print('zoomed out')
 end
 
 function M.toggle_zoom()
     -- Check for the tab-specific 'zoom' variable, indicating whether the
     -- current split is in a zoomed state or not
-    if not vim.t.zoom then
+    if not vim.t['simple-zoom'] then
         M.zoom_in()
-    elseif vim.t.zoom == 'zoom' then
+    elseif vim.t['simple-zoom'] == 'zoom' then
         M.zoom_out()
     end
 end
