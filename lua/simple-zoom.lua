@@ -3,11 +3,11 @@ local M = {}
 -- Default configuration
 M.opts = {
     hide_tabline = true,
-    center_view = true
 }
 
--- TODO: This should work with (1) no user-config or (2) user supplies both
--- config variables, but not if the user only supplies one config variable.
+-- NOTE: this may not work if there is more than one config variable and the
+-- user does not supply all of them, in which case a merging of user-specified
+-- and default config variables are needed.
 function M.setup(opts)
     M.opts = vim.tbl_extend("force", M.opts, opts or {})
 end
@@ -44,11 +44,6 @@ function M.zoom_out()
 
     -- Load the stored view
     vim.cmd[[loadview]]
-
-    -- Optionally center the view vertically
-    if M.opts.center_view then
-        vim.cmd[[normal! zz]]
-    end
     print('zoomed out')
 end
 
