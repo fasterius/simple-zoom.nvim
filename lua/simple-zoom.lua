@@ -1,7 +1,5 @@
 local M = {}
 
--- TODO: Remove development print statements
-
 -- Default configuration
 M.opts = {
     hide_tabline = true,
@@ -25,7 +23,6 @@ local function zoom_in()
 
     -- Set tab-specific variable
     vim.api.nvim_tabpage_set_var(0, 'simple-zoom', 'zoom')
-    print('zoomed in')
 end
 
 local function zoom_out()
@@ -42,7 +39,6 @@ local function zoom_out()
 
     -- Load the stored view
     vim.cmd[[loadview]]
-    print('zoomed out')
 end
 
 function M.toggle_zoom()
