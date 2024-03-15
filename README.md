@@ -53,7 +53,19 @@ A more complete installation and configuration could look like this:
 
 ## 🚀 Usage
 
-TODO
+To toggle zoom, simply use the `:SimpleZoomToggle` command. If you want to store
+this in a key map, you can do something like this:
+
+```lua
+vim.keymap.set('n', '<localleader>z', ':SimpleZoomToggle<CR>')
+```
+
+You can also access the underlying plugin function directly in a slightly more
+verbose way, if you prefer:
+
+```lua
+vim.keymap.set('n', '<localleader>z', require('simple-zoom').toggle_zoom)
+```
 
 ## 📕 About
 

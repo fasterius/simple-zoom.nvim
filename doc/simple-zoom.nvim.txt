@@ -26,7 +26,14 @@
 
  2. USAGE      						   *simple-zoom.usage*
 
- TODO
+ :SimpleZoomToggle    			       *simple-zoom.SimpleZoomToggle*
+
+ Use this command to toggle zoom on and off. If you want to create a key map
+ for this, you can do something like the following:
+
+>lua
+    vim.keymap.set('n', '<localleader>z', ':SimpleZoomToggle<CR>')
+<
 
 ==============================================================================
 

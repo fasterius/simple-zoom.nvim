@@ -57,4 +57,10 @@ end
 -- TODO: remove this and add in actual Neovim config
 vim.keymap.set('n', '<localleader>z', M.toggle_zoom)
 
+vim.api.nvim_create_user_command(
+    'SimpleZoomToggle',
+    M.toggle_zoom,
+    { desc = 'Toggle simple zoom on and off' }
+)
+
 return M
