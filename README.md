@@ -74,6 +74,34 @@ verbose way, if you prefer:
 vim.keymap.set('n', '<localleader>z', require('simple-zoom').toggle_zoom)
 ```
 
+## 🔥 Extras
+
+Since Simple Zoom sets a tab-specific variable when zoomed in, it is possible to
+use this variable to set _e.g._ a statusline element to show when zoom is
+toggled. For example, this is how it could be done using the popular
+[lualine.nvim](https://github.com/nvim-lualine/lualine.nvim) plugin:
+
+```lua
+local function IsZoomedIn()
+    if vim.t['simple-zoom'] == nil then
+        return ''
+    elseif vim.t['simple-zoom']== 'zoom' then
+        return '󰍉'
+    end
+end
+
+require('lualine').setup {
+    ...
+    sections = {
+        lualine_a = {
+            { 'filename' },
+            { IsZoomedIn },
+        }
+    }
+    ...
+}
+```
+
 ## 📕 About
 
 `simple-zoom` is very simple.
