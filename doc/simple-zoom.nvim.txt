@@ -31,18 +31,33 @@
 
  :SimpleZoomToggle    			       *simple-zoom.SimpleZoomToggle*
 
- Use this command to toggle zoom on and off. If you want to create a key map
- for this, you can do something like the following:
+   Use this command to toggle zoom on and off. When toggling on (zooming in)
+   the following happens:
 
+     1. The current split is opened in a new tab
+     2. The tabline is optionally hidden (see |simple-zoom.hide_tabline|)
+     3. A tab-specific variable (see `:h t:var`) `simple-zoom` is set to
+	`'zoom'`
+
+   When toggling off (zooming out) the following happens:
+
+     1. The current view is stored (see `:h mkview`)
+     2. The tabline is showed again if it was disabled when zooming in
+     3. The current tab is closed, which restores the previous layout before
+	zooming in
+     4. The view from within the zoomed tab is restored to the original split
+	(see `:h loadview`)
+
+   If you want to create a key map for this, you can do something like the
+   following:
 >lua
-    vim.keymap.set('n', '<localleader>z', ':SimpleZoomToggle<CR>')
+     vim.keymap.set('n', '<leader>z', ':SimpleZoomToggle<CR>')
 <
-
 ==============================================================================
 
  3. CONFIGURATION 			 	   *simple-zoom.configuration*
 
- hide_tabline (default: true)   		    *simple-zoom.hide_tabline*
+ hide_tabline (default: `true`)   		    *simple-zoom.hide_tabline*
 
    Specifies whether the tabline should be hidden while zoomed in. This is
    useful if you generally don't use tabs and would like the tabline hidden
@@ -60,23 +75,12 @@
 
  toggle_zoom()   				     *simple-zoom.toggle_zoom*
 
-   Toggles the zoom functionality on and off. When toggling on (zooming in)
-   the following happens:
-
-     1. The current split is opened in a new tab
-     2. The tabline is optionally hidden (see |simple-zoom.hide_tabline|)
-     3. A tab-specific variable (see `:h t:var`) `simple-zoom` is set to
-	`'zoom'`
-
-   When toggling off (zooming out) the following happens:
-
-     1. The current view is stored (see `:h mkview`)
-     2. The tabline is showed again if it was disabled when zooming in
-     3. The current tab is closed, which restores the previous layout before
-	zooming in
-     4. The view from within the zoomed tab is restored to the original split
-	(see `:h loadview`)
-
+   This is the plugin function that |SimpleZoomToggle| calls to toggle the
+   zoom functionality on and off. You can also use this in a keymap, if you
+   prefer:
+>lua
+     vim.keymap.set('n', '<leader>z', require('simple-zoom').toggle_zoom())
+<
 ==============================================================================
 
  vim:tw=78:ts=8:noet:ft=help:norl:

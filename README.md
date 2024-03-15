@@ -54,8 +54,14 @@ A more complete installation and configuration could look like this:
 ## 🚀 Usage
 
 This plugin does not set any key mappings by default, but instead provides the
-`:SimpleZoomToggle` command to toggle the zoom on or off. If you want to store
-this in a key map, you can do something like this:
+`:SimpleZoomToggle` command to toggle the zoom on or off. When toggling the zoom
+a new tab is created for the current split, for which a tab-specific variable is
+set. Upon toggling in a tab for which this tab-specific variable has been set,
+the tab is closed. The view is stored and loaded using `mkview` and `loadview`,
+respectively, which allows storage of _e.g._ cursor position, folds, _etc._
+
+If you want to create a key map for toggling zoom, you can do something like
+this:
 
 ```lua
 vim.keymap.set('n', '<localleader>z', ':SimpleZoomToggle<CR>')
@@ -70,11 +76,7 @@ vim.keymap.set('n', '<localleader>z', require('simple-zoom').toggle_zoom)
 
 ## 📕 About
 
-`simple-zoom` is very simple. When toggling the zoom a new tab is created for
-the current split, for which a tab-specific variable is set. Upon toggling in a
-tab for which this tab-specific variable has been set, the tab is closed. The
-view is stored and loaded using `mkview` and `loadview`, respectively, which
-allows storage of _e.g._ cursor position, folds, _etc._
+`simple-zoom` is very simple.
 
 The aim of this plugin is to emulate the Tmux zoom functionality and nothing
 else, without extra functionality or additional bells and whistles. There are
