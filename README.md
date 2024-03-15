@@ -33,7 +33,7 @@ You can install the plugin with your preferred package manager:
 {
     -- Hides the tabline when zooming. This is useful if you generally don't
     -- use tabs and would like the tabline to be hidden while zoomed, while not
-    -- having to set a global `vim.o.showtabline = true` elsewhere in your
+    -- having to set a global `vim.o.showtabline = false` elsewhere in your
     -- config. If you have `vim.o.showtabline = false` you should also set this
     -- option to false.
     hide_tabline = true
