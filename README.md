@@ -12,7 +12,7 @@ TODO: screen-cast.
 
 ## 📚 Requirements
 
-TODO
+Neovim >= **0.7.0**
 
 ## 📦 Installation
 
