@@ -1,5 +1,7 @@
 local M = {}
 
+-- TODO: Remove development print statements and keymap
+
 -- Default configuration
 M.opts = {
     hide_tabline = true,
