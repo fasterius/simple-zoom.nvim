@@ -62,3 +62,17 @@ the current split, for which a tab-specific variable is set. Upon toggling in a
 tab for which this tab-specific variable has been set, the tab is closed. The
 view is stored and loaded using `mkview` and `loadview`, respectively, which
 allows storage of _e.g._ cursor position, folds, _etc._
+
+The aim of this plugin is to emulate the Tmux zoom functionality and nothing
+else, without extra functionality or additional bells and whistles. There are
+several other Neovim plugins that has similar functionality to `simple-zoom`,
+but that are also more fully-featured:
+
+ - [focus.nvim](https://github.com/nvim-focus/focus.nvim)
+ - [zen-mode.nvim](https://github.com/folke/zen-mode.nvim)
+ - [true-zen.nvim](https://github.com/pocco81/true-zen.nvim)
+ - [NeoZoom.lua](https://github.com/nyngwang/NeoZoom.lua/tree/main)
+
+If you only care about the Tmux-like zoom functionality, `simple-zoom` is for
+you! If you are looking for something with additional features I recommend
+checking out the above mentioned plugins.
