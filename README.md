@@ -53,7 +53,8 @@ A more complete installation and configuration could look like this:
 
 ## 🚀 Usage
 
-To toggle zoom, simply use the `:SimpleZoomToggle` command. If you want to store
+This plugin does not set any key mappings by default, but instead provides the
+`:SimpleZoomToggle` command to toggle the zoom on or off. If you want to store
 this in a key map, you can do something like this:
 
 ```lua
