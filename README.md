@@ -1,20 +1,20 @@
-# Simple Zoom
+# 🔍 Simple Zoom
 
 A simple plugin to add a Tmux-like zoom functionality to Neovim.
 
 TODO: screen-cast.
 
-## Features
+## ✨ Features
 
  - Zoom into a split similar to `<prefix>z` in Tmux
  - Toggle the zoom with a single function or mapping
  - Retain the view when toggling zoom
 
-## Requirements
+## 📚 Requirements
 
 TODO
 
-## Installation
+## 📦 Installation
 
 You can install the plugin with your preferred package manager:
 
@@ -25,7 +25,7 @@ You can install the plugin with your preferred package manager:
 }
 ```
 
-## Configuration
+## ⚙️ Configuration
 
 `simple-zoom` comes with the following options and their respective defaults:
 
@@ -51,11 +51,11 @@ A more complete installation and configuration could look like this:
 }
 ```
 
-## Usage
+## 🚀 Usage
 
 TODO
 
-## About
+## 📕 About
 
 `simple-zoom` is very simple. When toggling the zoom a new tab is created for
 the current split, for which a tab-specific variable is set. Upon toggling in a
