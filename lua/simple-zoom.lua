@@ -14,7 +14,7 @@ function M.setup(opts)
     M.opts = vim.tbl_extend("force", M.opts, opts or {})
 end
 
-function M.zoom_in()
+local function zoom_in()
     -- Open current split in a new tab
     vim.cmd[[tab split]]
 
@@ -28,7 +28,7 @@ function M.zoom_in()
     print('zoomed in')
 end
 
-function M.zoom_out()
+local function zoom_out()
     -- Store view to get cursor position, folds, etc.
     vim.cmd[[mkview]]
 
@@ -49,9 +49,9 @@ function M.toggle_zoom()
     -- Check for the tab-specific 'zoom' variable, indicating whether the
     -- current split is in a zoomed state or not
     if not vim.t['simple-zoom'] then
-        M.zoom_in()
+        zoom_in()
     elseif vim.t['simple-zoom'] == 'zoom' then
-        M.zoom_out()
+        zoom_out()
     end
 end
 
