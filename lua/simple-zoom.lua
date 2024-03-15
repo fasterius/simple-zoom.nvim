@@ -1,6 +1,6 @@
 local M = {}
 
--- TODO: Remove development print statements and keymap
+-- TODO: Remove development print statements
 
 -- Default configuration
 M.opts = {
@@ -55,10 +55,7 @@ function M.toggle_zoom()
     end
 end
 
--- Development keymap
--- TODO: remove this and add in actual Neovim config
-vim.keymap.set('n', '<localleader>z', M.toggle_zoom)
-
+-- Add `SimpleZoomToggle` user command
 vim.api.nvim_create_user_command(
     'SimpleZoomToggle',
     M.toggle_zoom,
