@@ -41,9 +41,11 @@ local function zoom_out()
     vim.cmd[[loadview]]
 end
 
+-- Main function to toggle zoom state.
+-- Checks for the tab-specific 'simple-zoom' variable, indicating whether the
+-- current split is in a zoomed state or not, and calls the internal
+-- `zoom_{in,out}` functions as appropriate.
 function M.toggle_zoom()
-    -- Check for the tab-specific 'zoom' variable, indicating whether the
-    -- current split is in a zoomed state or not
     if not vim.t['simple-zoom'] then
         zoom_in()
     elseif vim.t['simple-zoom'] == 'zoom' then
