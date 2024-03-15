@@ -57,7 +57,7 @@ end
 vim.api.nvim_create_user_command(
     'SimpleZoomToggle',
     M.toggle_zoom,
-    { desc = 'Toggle simple zoom on and off' }
+    { desc = 'Toggle Simple Zoom on and off' }
 )
 
 return M
