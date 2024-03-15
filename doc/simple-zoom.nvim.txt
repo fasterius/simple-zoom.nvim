@@ -1,0 +1,72 @@
+ *simple-zoom.nvim.txt*             Add Tmux-like zoom functionality to Neovim
+
+==============================================================================
+
+ Table of contents                             *simple-zoom.table-of-contents*
+
+ 1. Introduction 	         |simple-zoom.introduction|
+ 2. Usage		         |simple-zoom.usage|
+ 3. Configuration 		 |simple-zoom.configuration|
+ 4. Functions		         |simple-zoom.functions|
+
+==============================================================================
+
+ 1. INTRODUCTION      				    *simple-zoom.introduction*
+
+ The aim of this plugin is to emulate the Tmux zoom functionality and nothing
+ else, without extra functionality or additional bells and whistles.
+
+ `simple-zoom` is very simple. When toggling the zoom a new tab is created for
+ the current split, for which a tab-specific variable is set. Upon toggling in
+ a tab for which this tab-specific variable has been set, the tab is closed.
+ The view is stored and loaded using `mkview` and `loadview`, respectively,
+ which allows storage of e.g. cursor position, folds, etc.
+
+==============================================================================
+
+ 2. USAGE      						   *simple-zoom.usage*
+
+ TODO
+
+==============================================================================
+
+ 3. CONFIGURATION 			 	   *simple-zoom.configuration*
+
+ hide_tabline (default: true)   		    *simple-zoom.hide_tabline*
+
+   Specifies whether the tabline should be hidden while zoomed in. This is
+   useful if you generally don't use tabs and would like the tabline hidden
+   while zoomed in, while not having a global setting for the tabline enabled
+   (see `:h showtabline`). It is also useful if you use tabs, but prefer the
+   tabline to be disabled while zoomed in.
+
+   When this option is enabled the tabline is re-enabled when zooming out.
+   This means that if you have set the tabline to hidden globally you need to
+   disable the `hide_tabline` option, or it will override your global option.
+
+==============================================================================
+
+ 4. FUNCTIONS 					       *simple-zoom.functions*
+
+ toggle_zoom()   				     *simple-zoom.toggle_zoom*
+
+   Toggles the zoom functionality on and off. When toggling on (zooming in)
+   the following happens:
+
+     1. The current split is opened in a new tab
+     2. The tabline is optionally hidden (see |simple-zoom.hide_tabline|)
+     3. A tab-specific variable (see `:h t:var`) `simple-zoom` is set to
+	`'zoom'`
+
+   When toggling off (zooming out) the following happens:
+
+     1. The current view is stored (see `:h mkview`)
+     2. The tabline is showed again if it was disabled when zooming in
+     3. The current tab is closed, which restores the previous layout before
+	zooming in
+     4. The view from within the zoomed tab is restored to the original split
+	(see `:h loadview`)
+
+==============================================================================
+
+ vim:tw=78:ts=8:noet:ft=help:norl:
