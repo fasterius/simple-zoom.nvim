@@ -52,7 +52,7 @@
    If you want to create a key map for this, you can do something like the
    following:
 >lua
-     vim.keymap.set('n', '<leader>z', ':SimpleZoomToggle<CR>')
+     vim.keymap.set('n', '<localleader>z', ':SimpleZoomToggle<CR>')
 <
 ==============================================================================
 
@@ -80,7 +80,7 @@
    zoom functionality on and off. You can also use this in a keymap, if you
    prefer:
 >lua
-     vim.keymap.set('n', '<leader>z', require('simple-zoom').toggle_zoom())
+     vim.keymap.set('n', '<localleader>z', require('simple-zoom').toggle_zoom())
 <
 ==============================================================================
 
