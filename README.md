@@ -7,8 +7,9 @@ https://github.com/fasterius/simple-zoom.nvim/assets/12528765/354e67fa-5bc0-4aae
 ## ✨ Features
 
  - Zoom into a split similar to `<prefix>z` in Tmux
- - Toggle the zoom with a single function or mapping
+ - Toggle the zoom with a single command or mapping
  - Retain the view when toggling zoom
+ - Can be integrated into the statusline
 
 ## 📚 Requirements
 
