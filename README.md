@@ -2,6 +2,8 @@
 
 A simple plugin to add a Tmux-like zoom functionality to Neovim.
 
+https://github.com/fasterius/simple-zoom.nvim/assets/12528765/354e67fa-5bc0-4aae-a41d-5f0440de21ff
+
 ## ✨ Features
 
  - Zoom into a split similar to `<prefix>z` in Tmux
@@ -77,7 +79,8 @@ vim.keymap.set('n', '<localleader>z', require('simple-zoom').toggle_zoom)
 Since Simple Zoom sets a tab-specific variable when zoomed in, it is possible to
 use this variable to set _e.g._ a statusline element to show when zoom is
 toggled. For example, this is how it could be done using the popular
-[lualine.nvim](https://github.com/nvim-lualine/lualine.nvim) plugin:
+[lualine.nvim](https://github.com/nvim-lualine/lualine.nvim) plugin (the results
+of which are shown in the demo above):
 
 ```lua
 local function IsZoomedIn()
