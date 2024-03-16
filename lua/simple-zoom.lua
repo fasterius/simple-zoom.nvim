@@ -5,13 +5,12 @@ M.opts = {
     hide_tabline = true,
 }
 
--- NOTE: this may not work if there is more than one config variable and the
--- user does not supply all of them, in which case a merging of user-specified
--- and default config variables are needed.
+-- Setup with options
 function M.setup(opts)
     M.opts = vim.tbl_extend("force", M.opts, opts or {})
 end
 
+-- Internal function for zooming in
 local function zoom_in()
     -- Open current split in a new tab
     vim.cmd[[tab split]]
@@ -25,6 +24,7 @@ local function zoom_in()
     vim.api.nvim_tabpage_set_var(0, 'simple-zoom', 'zoom')
 end
 
+-- Internal function for zooming out
 local function zoom_out()
     -- Store view to get cursor position, folds, etc.
     vim.cmd[[mkview]]
@@ -41,11 +41,9 @@ local function zoom_out()
     vim.cmd[[loadview]]
 end
 
--- Main function to toggle zoom state.
--- Checks for the tab-specific 'simple-zoom' variable, indicating whether the
--- current split is in a zoomed state or not, and calls the internal
--- `zoom_{in,out}` functions as appropriate.
+-- Main function to toggle zoom state
 function M.toggle_zoom()
+    -- Check for tab-specific variable and call the appropriate zoom function
     if not vim.t['simple-zoom'] then
         zoom_in()
     elseif vim.t['simple-zoom'] == 'zoom' then
@@ -54,7 +52,7 @@ function M.toggle_zoom()
 end
 
 -- Add `SimpleZoomToggle` user command
-vim.api.nvim_create_user_command(
+vim.api.nvim_create_user_command (
     'SimpleZoomToggle',
     M.toggle_zoom,
     { desc = 'Toggle Simple Zoom on and off' }

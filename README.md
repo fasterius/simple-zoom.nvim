@@ -2,8 +2,6 @@
 
 A simple plugin to add a Tmux-like zoom functionality to Neovim.
 
-TODO: screen-cast.
-
 ## ✨ Features
 
  - Zoom into a split similar to `<prefix>z` in Tmux
