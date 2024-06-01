@@ -17,7 +17,7 @@ local function zoom_in()
 
     -- Optionally hide the tabline
     if M.opts.hide_tabline then
-        vim.o.showtabline = false
+        vim.o.showtabline = 0
     end
 
     -- Set tab-specific variable
@@ -31,7 +31,7 @@ local function zoom_out()
 
     -- Show tabline again if it was hidden
     if M.opts.hide_tabline then
-        vim.o.showtabline = true
+        vim.o.showtabline = 1
     end
 
     -- Close the tab and return to the un-zoomed view
