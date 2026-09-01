@@ -5,10 +5,12 @@
  Table of contents                             *simple-zoom.table-of-contents*
 
  1. Introduction 	         |simple-zoom.introduction|
- 2. Usage		         |simple-zoom.usage|
- 3. Configuration 		 |simple-zoom.configuration|
- 4. Functions		         |simple-zoom.functions|
- 5. Extras			 |simple-zoom.extras|
+ 2. Requirements	         |simple-zoom.requirements|
+ 3. Usage		         |simple-zoom.usage|
+ 4. Configuration 		 |simple-zoom.configuration|
+ 5. Commands		         |simple-zoom.commands|
+ 6. Keymaps		         |simple-zoom.keymaps|
+ 7. Extras			 |simple-zoom.extras|
 
 ==============================================================================
 
@@ -25,38 +27,36 @@
 
 ==============================================================================
 
- 2. USAGE      						   *simple-zoom.usage*
+ 2. REQUIREMENTS      				    *simple-zoom.requirements*
 
- This plugin does not export any key mappings, but supplies a user-command to
- toggle zoom on or off; see |simple-zoom.SimpleZoomToggle|.
+ Neovim >= 0.10.0.
 
- :SimpleZoomToggle    			       *simple-zoom.SimpleZoomToggle*
-
-   Use this command to toggle zoom on and off. When toggling on (zooming in)
-   the following happens:
-
-     1. The current split is opened in a new tab
-     2. The tabline is optionally hidden (see |simple-zoom.hide_tabline|)
-     3. A tab-specific variable (see `:h t:var`) `simple-zoom` is set to
-	`'zoom'`
-
-   When toggling off (zooming out) the following happens:
-
-     1. The current view is stored (see `:h mkview`)
-     2. The tabline is showed again if it was disabled when zooming in
-     3. The current tab is closed, which restores the previous layout before
-	zooming in
-     4. The view from within the zoomed tab is restored to the original split
-	(see `:h loadview`)
-
-   If you want to create a key map for this, you can do something like the
-   following:
->lua
-     vim.keymap.set('n', '<localleader>z', ':SimpleZoomToggle<CR>')
-<
 ==============================================================================
 
- 3. CONFIGURATION 			 	   *simple-zoom.configuration*
+ 3. USAGE      						   *simple-zoom.usage*
+
+ When toggling on (zooming in) the following happens:
+
+   1. The current split is opened in a new tab
+   2. The tabline is optionally hidden (see |simple-zoom.hide_tabline|)
+   3. A tab-specific variable (see `:h t:var`) `simple-zoom` is set to
+      `'zoom'`
+
+ When toggling off (zooming out) the following happens:
+
+   1. The current view is stored (see `:h mkview`)
+   2. The tabline is showed again if it was disabled when zooming in
+   3. The current tab is closed, which restores the previous layout before
+      zooming in
+   4. The view from within the zoomed tab is restored to the original split
+      (see `:h loadview`)
+
+ See |simple-zoom.commands| for the command that triggers this, and
+ |simple-zoom.keymaps| for keymap examples.
+
+==============================================================================
+
+ 4. CONFIGURATION 			 	   *simple-zoom.configuration*
 
  hide_tabline (default: `true`)   		    *simple-zoom.hide_tabline*
 
@@ -72,19 +72,35 @@
 
 ==============================================================================
 
- 4. FUNCTIONS 					       *simple-zoom.functions*
+ 5. COMMANDS 					        *simple-zoom.commands*
 
- toggle_zoom()   				     *simple-zoom.toggle_zoom*
+ :SimpleZoomToggle    			       *simple-zoom.SimpleZoomToggle*
 
-   This is the plugin function that |SimpleZoomToggle| calls to toggle the
-   zoom functionality on and off. You can also use this in a keymap, if you
-   prefer:
->lua
-     vim.keymap.set('n', '<localleader>z', require('simple-zoom').toggle_zoom())
-<
+   Toggle zoom on and off; see |simple-zoom.usage| for what happens when
+   toggling.
+
 ==============================================================================
 
- 5. EXTRAS 					  	  *simple-zoom.extras*
+ 6. KEYMAPS 					         *simple-zoom.keymaps*
+
+ This plugin does not export any key mappings by default, but exposes the
+ |simple-zoom.SimpleZoomToggle| command and the `toggle_zoom()` Lua function
+ (|simple-zoom.toggle_zoom|), which you can map yourself, e.g.:
+>lua
+     vim.keymap.set('n', '<localleader>z', ':SimpleZoomToggle<CR>')
+<
+ or, calling the underlying function directly:
+>lua
+     vim.keymap.set('n', '<localleader>z', require('simple-zoom').toggle_zoom)
+<
+ toggle_zoom()   				     *simple-zoom.toggle_zoom*
+
+   This is the plugin function that |simple-zoom.SimpleZoomToggle| calls to
+   toggle the zoom functionality on and off.
+
+==============================================================================
+
+ 7. EXTRAS 					  	  *simple-zoom.extras*
 
  Statusline integration      	          *simple-zoom.statusline-integration*
 
@@ -114,4 +130,4 @@
 <
 ==============================================================================
 
- vim:tw=78:ts=8:noet:ft=help:norl:
+ vim:tw=78:ts=8:sw=4:sts=4:et:ft=help:norl:

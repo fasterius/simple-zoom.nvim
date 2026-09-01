@@ -13,7 +13,7 @@ https://github.com/fasterius/simple-zoom.nvim/assets/12528765/354e67fa-5bc0-4aae
 
 ## 📚 Requirements
 
-Neovim >= **0.7.0**
+Neovim >= **0.10.0**
 
 ## 📦 Installation
 
@@ -24,6 +24,29 @@ You can install the plugin with your preferred package manager:
     "fasterius/simple-zoom.nvim",
     config = true,
 }
+```
+
+## 🚀 Usage
+
+This plugin does not set any key mappings by default, but instead provides the
+`:SimpleZoomToggle` command to toggle the zoom on or off. When toggling the zoom
+a new tab is created for the current split, for which a tab-specific variable is
+set. Upon toggling in a tab for which this tab-specific variable has been set,
+the tab is closed. The view is stored and loaded using `mkview` and `loadview`,
+respectively, which allows storage of _e.g._ cursor position, folds, _etc._
+
+If you want to create a key map for toggling zoom, you can do something like
+this:
+
+```lua
+vim.keymap.set('n', '<localleader>z', ':SimpleZoomToggle<CR>')
+```
+
+You can also access the underlying plugin function directly in a slightly more
+verbose way, if you prefer:
+
+```lua
+vim.keymap.set('n', '<localleader>z', require('simple-zoom').toggle_zoom)
 ```
 
 ## ⚙️ Configuration
@@ -50,29 +73,6 @@ A more complete installation and configuration could look like this:
         hide_tabline = true
     },
 }
-```
-
-## 🚀 Usage
-
-This plugin does not set any key mappings by default, but instead provides the
-`:SimpleZoomToggle` command to toggle the zoom on or off. When toggling the zoom
-a new tab is created for the current split, for which a tab-specific variable is
-set. Upon toggling in a tab for which this tab-specific variable has been set,
-the tab is closed. The view is stored and loaded using `mkview` and `loadview`,
-respectively, which allows storage of _e.g._ cursor position, folds, _etc._
-
-If you want to create a key map for toggling zoom, you can do something like
-this:
-
-```lua
-vim.keymap.set('n', '<localleader>z', ':SimpleZoomToggle<CR>')
-```
-
-You can also access the underlying plugin function directly in a slightly more
-verbose way, if you prefer:
-
-```lua
-vim.keymap.set('n', '<localleader>z', require('simple-zoom').toggle_zoom)
 ```
 
 ## 🔥 Extras
