@@ -1,13 +1,21 @@
 local M = {}
 
+---@class simple_zoom.Opts
+---@field hide_tabline? boolean
+
 -- Default configuration
+---@type simple_zoom.Opts
 M.opts = {
     hide_tabline = true,
 }
 
--- Setup with options
+---Setup with options and validation
+---@param opts simple_zoom.Opts|nil
 function M.setup(opts)
-    M.opts = vim.tbl_extend("force", M.opts, opts or {})
+    opts = opts or {}
+    vim.validate("opts", opts, "table")
+    vim.validate("opts.hide_tabline", opts.hide_tabline, "boolean", true)
+    M.opts = vim.tbl_extend("force", M.opts, opts)
 end
 
 -- Internal function for zooming in
@@ -41,17 +49,15 @@ local function zoom_out()
     vim.cmd([[loadview]])
 end
 
--- Main function to toggle zoom state
+---Toggle the zoom state
+---Checks for the tab-specific `simple-zoom` variable and calls the
+---appropriate zoom function.
 function M.toggle_zoom()
-    -- Check for tab-specific variable and call the appropriate zoom function
     if not vim.t["simple-zoom"] then
         zoom_in()
     elseif vim.t["simple-zoom"] == "zoom" then
         zoom_out()
     end
 end
-
--- Add `SimpleZoomToggle` user command
-vim.api.nvim_create_user_command("SimpleZoomToggle", M.toggle_zoom, { desc = "Toggle Simple Zoom on and off" })
 
 return M
