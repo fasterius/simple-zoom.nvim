@@ -11,10 +11,10 @@ local known_opts = {
 function M.check()
     vim.health.start("simple-zoom.nvim")
 
-    if vim.fn.has("nvim-0.10.0") == 1 then
-        vim.health.ok("Neovim version is >= 0.10.0")
+    if vim.fn.has("nvim-0.11.0") == 1 then
+        vim.health.ok("Neovim version is >= 0.11.0")
     else
-        vim.health.error("Neovim version is too old", "simple-zoom.nvim requires at least Neovim v0.10.0")
+        vim.health.error("Neovim version is too old", "simple-zoom.nvim requires at least Neovim v0.11.0")
     end
 
     local opts = require("simple-zoom").opts

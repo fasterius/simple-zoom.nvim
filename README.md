@@ -6,14 +6,14 @@ https://github.com/fasterius/simple-zoom.nvim/assets/12528765/354e67fa-5bc0-4aae
 
 ## ✨ Features
 
- - Zoom into a split similar to `<prefix>z` in Tmux
- - Toggle the zoom with a single command or mapping
- - Retain the view when toggling zoom
- - Can be integrated into the statusline
+- Zoom into a split similar to `<prefix>z` in Tmux
+- Toggle the zoom with a single command or mapping
+- Retain the view when toggling zoom
+- Can be integrated into the statusline
 
 ## 📚 Requirements
 
-Neovim >= **0.10.0**
+Neovim >= **0.11.0**
 
 ## 📦 Installation
 
@@ -113,10 +113,10 @@ else, without extra functionality or additional bells and whistles. There are
 several other Neovim plugins that has similar functionality to `simple-zoom`,
 but that are also more fully-featured:
 
- - [focus.nvim](https://github.com/nvim-focus/focus.nvim)
- - [zen-mode.nvim](https://github.com/folke/zen-mode.nvim)
- - [true-zen.nvim](https://github.com/pocco81/true-zen.nvim)
- - [NeoZoom.lua](https://github.com/nyngwang/NeoZoom.lua/tree/main)
+- [focus.nvim](https://github.com/nvim-focus/focus.nvim)
+- [zen-mode.nvim](https://github.com/folke/zen-mode.nvim)
+- [true-zen.nvim](https://github.com/pocco81/true-zen.nvim)
+- [NeoZoom.lua](https://github.com/nyngwang/NeoZoom.lua/tree/main)
 
 If you only care about the Tmux-like zoom functionality, `simple-zoom` is for
 you! If you are looking for something with additional features I recommend
