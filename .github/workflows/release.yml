@@ -18,7 +18,9 @@ jobs:
           fetch-depth: 0
 
       - name: Extract tag message
-        run: git tag -l --format='%(contents:body)' "${{ github.ref_name }}" > release-notes.md
+        run: |
+          git fetch origin "refs/tags/${{ github.ref_name }}:refs/tags/${{ github.ref_name }}" --force
+          git tag -l --format='%(contents:body)' "${{ github.ref_name }}" > release-notes.md
 
       - name: Create release
         uses: softprops/action-gh-release@v2
