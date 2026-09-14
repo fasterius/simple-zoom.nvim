@@ -33,7 +33,8 @@ function M.check()
         vim.health.warn(
             "Unrecognised configuration option(s): "
                 .. table.concat(unknown, ", "),
-            "Check for typos; see |simple-zoom.configuration| for the supported options"
+            "Check for typos; see |simple-zoom.configuration| for the "
+                .. "supported options"
         )
     end
 end
