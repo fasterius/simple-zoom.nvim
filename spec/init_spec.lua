@@ -11,7 +11,7 @@ describe("toggle_zoom", function()
         -- Give a baseline different from what the plugin sets for `showtabline`
         vim.o.showtabline = 2
 
-        -- Create a real file for each test, needed for `mkview` to work
+        -- Create a real file for each test with some content
         file = vim.fn.tempname()
         vim.cmd("edit " .. file)
         vim.api.nvim_buf_set_lines(0, 0, -1, false, { "line one", "line two" })
@@ -24,8 +24,10 @@ describe("toggle_zoom", function()
             vim.cmd("tabclose")
         end
 
-        -- Clean up the buffer and remove the file
-        vim.cmd("bwipeout!")
+        -- Clean up every buffer opened during the test and remove the file
+        for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+            vim.api.nvim_buf_delete(buf, { force = true })
+        end
         os.remove(file)
     end)
 
@@ -89,6 +91,16 @@ describe("toggle_zoom", function()
         vim.api.nvim_win_set_cursor(0, { 2, 1 })
         simple_zoom.toggle_zoom()
         assert.equal(2, vim.api.nvim_win_get_cursor(0)[1])
+    end)
+
+    it("does not error when zooming in on an unnamed buffer", function()
+        -- Create a new, unnamed buffer
+        vim.cmd("enew")
+        ---@diagnostic disable-next-line: undefined-field
+        assert.has_no.errors(function()
+            simple_zoom.toggle_zoom()
+            simple_zoom.toggle_zoom()
+        end)
     end)
 
     it("does nothing when the tab-scoped variable is unrecognised", function()

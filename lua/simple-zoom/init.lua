@@ -31,8 +31,9 @@ end
 
 -- Internal function for zooming out
 local function zoom_out()
-    -- Store view to get cursor position, folds, etc.
-    vim.cmd([[mkview]])
+    -- Store the window view (cursor position, folds, etc.) to restore once
+    -- the zoomed tab is closed
+    local view = vim.fn.winsaveview()
 
     -- Restore the `showtabline` value from before zooming in, as applicable
     if config.opts.hide_tabline then
@@ -42,8 +43,8 @@ local function zoom_out()
     -- Close the tab and return to the un-zoomed view
     vim.cmd([[tab close]])
 
-    -- Load the stored view
-    vim.cmd([[loadview]])
+    -- Restore the stored window view
+    vim.fn.winrestview(view)
 end
 
 ---Toggle the zoom state
