@@ -29,11 +29,12 @@ You can install the plugin with your preferred package manager:
 ## 🚀 Usage
 
 This plugin does not set any key mappings by default, but instead provides the
-`:SimpleZoomToggle` command to toggle the zoom on or off. When toggling the zoom
-a new tab is created for the current split, for which a tab-specific variable is
-set. Upon toggling in a tab for which this tab-specific variable has been set,
-the tab is closed. The view is stored and loaded using `mkview` and `loadview`,
-respectively, which allows storage of _e.g._ cursor position, folds, _etc._
+`:SimpleZoomToggle` command or the `toggle_zoom` Lua function to toggle the zoom
+on or off. When toggling the zoom a new tab is created for the current split,
+for which a tab-specific variable is set. Upon toggling in a tab for which this
+tab-specific variable has been set, the tab is closed. The view is stored and
+loaded when appropriate, which allows maintaining _e.g._ cursor position, folds,
+_etc._
 
 If you want to create a key map for toggling zoom, you can do something like
 this:
@@ -42,8 +43,7 @@ this:
 vim.keymap.set('n', '<localleader>z', ':SimpleZoomToggle<CR>')
 ```
 
-You can also access the underlying plugin function directly in a slightly more
-verbose way, if you prefer:
+You can also access the underlying plugin function directly:
 
 ```lua
 vim.keymap.set('n', '<localleader>z', require('simple-zoom').toggle_zoom)
@@ -58,8 +58,7 @@ vim.keymap.set('n', '<localleader>z', require('simple-zoom').toggle_zoom)
     -- Hides the tabline when zooming. This is useful if you generally don't
     -- use tabs and would like the tabline to be hidden while zoomed, while not
     -- having to set a global `vim.o.showtabline = false` elsewhere in your
-    -- config. If you DO have the tabline disabled globally you should also set
-    -- this option to false.
+    -- config.
     hide_tabline = true
 }
 ```
@@ -77,27 +76,27 @@ A more complete installation and configuration could look like this:
 
 ## 🔥 Extras
 
-Since Simple Zoom sets a tab-specific variable when zoomed in, it is possible to
-use this variable to set _e.g._ a statusline element to show when zoom is
-toggled. For example, this is how it could be done using the popular
+Since Simple Zoom sets a tab-specific variable (a table) when zoomed in, it is
+possible to use this variable to set _e.g._ a statusline element to show when
+zoom is toggled. For example, this is how it could be done using the popular
 [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim) plugin (the results
 of which are shown in the demo above):
 
 ```lua
-local function IsZoomedIn()
-    if vim.t['simple-zoom'] == nil then
+local function is_zoomed_in()
+    if not vim.t["simple-zoom"] then
         return ''
-    elseif vim.t['simple-zoom']== 'zoom' then
+    elseif type(vim.t["simple-zoom"]) == "table" then
         return '󰍉'
     end
 end
 
-require('lualine').setup {
+require("lualine").setup {
     ...
     sections = {
         lualine_a = {
-            { 'filename' },
-            { IsZoomedIn },
+            { "filename" },
+            { is_zoomed_in },
         }
     }
     ...

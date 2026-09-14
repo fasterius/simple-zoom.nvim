@@ -22,8 +22,8 @@
  `simple-zoom` is very simple. When toggling the zoom a new tab is created for
  the current split, for which a tab-specific variable is set. Upon toggling in
  a tab for which this tab-specific variable has been set, the tab is closed.
- The view is stored and loaded using `mkview` and `loadview`, respectively,
- which allows storage of e.g. cursor position, folds, etc.
+ The view is stored and loaded as appropriate, which allows storage of e.g.
+ cursor position, folds, etc.
 
 ==============================================================================
 
@@ -38,18 +38,17 @@
  When toggling on (zooming in) the following happens:
 
    1. The current split is opened in a new tab
-   2. The tabline is optionally hidden (see |simple-zoom.hide_tabline|)
-   3. A tab-specific variable (see `:h t:var`) `simple-zoom` is set to
-      `'zoom'`
+   2. The tabline is optionally hidden (see |simple-zoom.hide_tabline|), while
+      remember the current value
+   3. A tab-specific variable (a table; see `:h t:var`) `simple-zoom` is set
 
  When toggling off (zooming out) the following happens:
 
-   1. The current view is stored (see `:h mkview`)
-   2. The tabline is showed again if it was disabled when zooming in
+   1. The current view is stored
+   2. The tabline is restored to its previous value
    3. The current tab is closed, which restores the previous layout before
       zooming in
    4. The view from within the zoomed tab is restored to the original split
-      (see `:h loadview`)
 
  See |simple-zoom.commands| for the command that triggers this, and
  |simple-zoom.keymaps| for keymap examples.
@@ -66,9 +65,8 @@
    (see `:h showtabline`). It is also useful if you use tabs, but prefer the
    tabline to be disabled while zoomed in.
 
-   When this option is enabled the tabline is re-enabled when zooming out.
-   This means that if you have set the tabline to hidden globally you need to
-   disable the `hide_tabline` option, or it will override your global option.
+   When this option is enabled the tabline is reset to whatever value it was
+   before zooming in when you zoom back out.
 
 ==============================================================================
 
@@ -104,28 +102,28 @@
 
  Statusline integration      	          *simple-zoom.statusline-integration*
 
-   Since Simple Zoom sets a tab-specific variable when zoomed in, it is
-   possible to use this variable to set _e.g._ a statusline element to show
+   Since Simple Zoom sets a tab-specific variable (a table) when zoomed in, it
+   is possible to use this variable to set e.g. a statusline element to show
    when zoom is toggled. For example, this is how it could be done using the
    popular `lualine.nvim` plugin:
 >lua
-    local function IsZoomedIn()
-	if vim.t['simple-zoom'] == nil then
-	    return ''
-	elseif vim.t['simple-zoom']== 'zoom' then
-	    return '󰍉'
-	end
+    local function is_zoomed_in()
+        if not vim.t["simple-zoom"] then
+            return ''
+        elseif type(vim.t["simple-zoom"]) == "table" then
+            return '󰍉'
+        end
     end
 
-    require('lualine').setup {
-	...
-	sections = {
-	    lualine_a = {
-		{ 'filename' },
-		{ IsZoomedIn },
-	    }
-	}
-	...
+    require("lualine").setup {
+        ...
+        sections = {
+            lualine_a = {
+                { "filename" },
+                { is_zoomed_in },
+            }
+        }
+        ...
     }
 <
 ==============================================================================
