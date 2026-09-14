@@ -1,21 +1,11 @@
 local M = {}
 
----@class simple_zoom.Opts
----@field hide_tabline? boolean
+local config = require("simple-zoom.config")
 
--- Default configuration
----@type simple_zoom.Opts
-M.opts = {
-    hide_tabline = true,
-}
-
----Setup with options and validation
----@param opts simple_zoom.Opts|nil
+---Setup with user options
+---@param opts simple_zoom.Opts | nil
 function M.setup(opts)
-    opts = opts or {}
-    vim.validate("opts", opts, "table")
-    vim.validate("opts.hide_tabline", opts.hide_tabline, "boolean", true)
-    M.opts = vim.tbl_extend("force", M.opts, opts)
+    config.setup(opts)
 end
 
 -- Internal function for zooming in
@@ -24,7 +14,7 @@ local function zoom_in()
     vim.cmd([[tab split]])
 
     -- Optionally hide the tabline
-    if M.opts.hide_tabline then
+    if config.opts.hide_tabline then
         vim.o.showtabline = 0
     end
 
@@ -38,7 +28,7 @@ local function zoom_out()
     vim.cmd([[mkview]])
 
     -- Show tabline again if it was hidden
-    if M.opts.hide_tabline then
+    if config.opts.hide_tabline then
         vim.o.showtabline = 1
     end
 

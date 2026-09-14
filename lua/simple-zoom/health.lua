@@ -17,7 +17,7 @@ function M.check()
         vim.health.error("Neovim version is too old", "simple-zoom.nvim requires at least Neovim v0.11.0")
     end
 
-    local opts = require("simple-zoom").opts
+    local opts = require("simple-zoom.config").opts
     local unknown = {}
     for key in pairs(opts) do
         if not known_opts[key] then
