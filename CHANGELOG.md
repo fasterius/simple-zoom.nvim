@@ -1,6 +1,30 @@
 # Changelog
 
-## [1.1.0] 2026-09-01
+## [1.1.2]
+
+### Changed
+
+- The tab-specific `simple-zoom` variable set when zoomed in is now a table
+  instead of the string `"zoom"`; statusline or other integrations reading it
+  directly (see the _Extras_ section in `README.md`) should use
+  `type(vim.t["simple-zoom"]) == "table"` instead of comparing it to `"zoom"`.
+
+### Fixed
+
+- The previous value of `showtabline` is now restored after zooming out (if
+  it had been set by _e.g._ user configuration beforehand) instead of always
+  being reset to `1`.
+- Zooming in on a buffer without a file name (_e.g._ a scratch, quickfix or
+  terminal buffer) no longer raises an `E32: No file name` error and leaves
+  the plugin stuck in a zoomed-in state.
+
+## [1.1.1]
+
+### Fixed
+
+- Corrected the minimum required Neovim version to 0.11.0.
+
+## [1.1.0]
 
 ### Added
 
@@ -24,14 +48,14 @@
 - Fixed a broken keymap example in the help docs that called `toggle_zoom()`
   instead of passing the function reference.
 
-## [1.0.1] - 2024-06-01
+## [1.0.1]
 
 ### Fixed
 
 - Use `0`/`1` instead of `true`/`false` for `showtabline`, which gave an error
   on Neovim 0.10 (#1).
 
-## [1.0.0] - 2024-03-19
+## [1.0.0]
 
 ### Added
 
