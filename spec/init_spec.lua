@@ -33,7 +33,7 @@ describe("toggle_zoom", function()
         local tabs_before = #vim.api.nvim_list_tabpages()
         simple_zoom.toggle_zoom()
         assert.equal(tabs_before + 1, #vim.api.nvim_list_tabpages())
-        assert.equal("zoom", vim.t["simple-zoom"])
+        assert.equal(2, vim.t["simple-zoom"].showtabline)
     end)
 
     it("closes the zoomed tab and clears the zoom state", function()
@@ -51,12 +51,14 @@ describe("toggle_zoom", function()
     end)
 
     it(
-        "restores the tabline on zoom out when `hide_tabline` is true",
+        "restores the tabline to its previous value on zoom out when "
+            .. "`hide_tabline` is true",
         function()
+            -- Baseline is `vim.o.showtabline = 2`, set in `before_each`
             config.opts.hide_tabline = true
             simple_zoom.toggle_zoom()
             simple_zoom.toggle_zoom()
-            assert.equal(1, vim.o.showtabline)
+            assert.equal(2, vim.o.showtabline)
         end
     )
 

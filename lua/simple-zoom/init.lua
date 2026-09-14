@@ -10,6 +10,9 @@ end
 
 -- Internal function for zooming in
 local function zoom_in()
+    -- Remember the current `showtabline` value
+    local showtabline = vim.o.showtabline
+
     -- Open current split in a new tab
     vim.cmd([[tab split]])
 
@@ -18,8 +21,12 @@ local function zoom_in()
         vim.o.showtabline = 0
     end
 
-    -- Set tab-specific variable
-    vim.api.nvim_tabpage_set_var(0, "simple-zoom", "zoom")
+    -- Set tab-specific variable to previously remembered `showtabline`
+    vim.api.nvim_tabpage_set_var(
+        0,
+        "simple-zoom",
+        { showtabline = showtabline }
+    )
 end
 
 -- Internal function for zooming out
@@ -27,9 +34,9 @@ local function zoom_out()
     -- Store view to get cursor position, folds, etc.
     vim.cmd([[mkview]])
 
-    -- Show tabline again if it was hidden
+    -- Restore the `showtabline` value from before zooming in, as applicable
     if config.opts.hide_tabline then
-        vim.o.showtabline = 1
+        vim.o.showtabline = vim.t["simple-zoom"].showtabline
     end
 
     -- Close the tab and return to the un-zoomed view
@@ -45,7 +52,7 @@ end
 function M.toggle_zoom()
     if not vim.t["simple-zoom"] then
         zoom_in()
-    elseif vim.t["simple-zoom"] == "zoom" then
+    elseif type(vim.t["simple-zoom"]) == "table" then
         zoom_out()
     end
 end
