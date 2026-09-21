@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0]
+
+### Added
+
+- Support for configuration via `vim.g.simple_zoom` for use with e.g. the
+  built-in `vim.pack` plugin manager.
+
 ## [1.1.2]
 
 ### Changed
