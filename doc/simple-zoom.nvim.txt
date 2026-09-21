@@ -57,6 +57,9 @@
 
  4. CONFIGURATION 			 	   *simple-zoom.configuration*
 
+ Options can be passed using the `vim.g.slime_peek = {opts}` table or by using
+ setup via `require("slime_peek").setup({opts})`.
+
  hide_tabline (default: `true`)   		    *simple-zoom.hide_tabline*
 
    Specifies whether the tabline should be hidden while zoomed in. This is

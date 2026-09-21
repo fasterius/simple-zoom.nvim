@@ -20,9 +20,16 @@ Neovim >= **0.11.0**
 You can install the plugin with your preferred package manager:
 
 ```lua
+-- vim.pack
+vim.pack.add({
+    "https://github.com/fasterius/simple-zoom.nvim",
+})
+```
+
+```lua
+-- lazy.nvim
 {
     "fasterius/simple-zoom.nvim",
-    config = true,
 }
 ```
 
@@ -40,7 +47,7 @@ If you want to create a key map for toggling zoom, you can do something like
 this:
 
 ```lua
-vim.keymap.set('n', '<localleader>z', ':SimpleZoomToggle<CR>')
+vim.keymap.set('n', '<localleader>z', '<CMD>SimpleZoomToggle<CR>')
 ```
 
 You can also access the underlying plugin function directly:
@@ -66,6 +73,17 @@ vim.keymap.set('n', '<localleader>z', require('simple-zoom').toggle_zoom)
 A more complete installation and configuration could look like this:
 
 ```lua
+-- vim.pack
+vim.pack.add({
+    "https://github.com/fasterius/simple-zoom.nvim",
+})
+vim.g.slime_peek = {
+    hide_tabline = true,
+}
+```
+
+```lua
+-- lazy.nvim
 {
     "fasterius/simple-zoom.nvim",
     opts = {

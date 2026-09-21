@@ -19,4 +19,9 @@ function M.setup(opts)
     M.opts = vim.tbl_extend("force", M.opts, opts)
 end
 
+-- Apply configuration set via `vim.g`, if present
+if vim.g.simple_zoom then
+    M.setup(vim.g.simple_zoom)
+end
+
 return M
